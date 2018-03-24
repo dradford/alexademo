@@ -2,7 +2,7 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 
 const options = {
-  uri: ``,
+  uri: `https://bugcrowd.com/programs`,
   transform: function (body) {
     return cheerio.load(body);
   }
@@ -10,7 +10,9 @@ const options = {
 
 rp(options)
   .then(($) => {
-    console.log($);
+    $('.bc-panel__title').each(function(i, elem) {
+      console.log($(this).text());
+    });
   })
   .catch((err) => {
     console.log(err);
